@@ -1,17 +1,17 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='env_replace',
+    name='docker-link-helper',
     version='0.0.1',
-    packages=[''],
-    url='https://github.com/traum-ferienwohnungen/docker-link-helper',
+    url='https://github.com/traum-ferienwohnungen/helper',
     license='MIT',
     author='Till Backhaus',
     author_email='tback@tfw.ag',
     description='Replace env variables',
+    packages=['helper'],
     entry_points={
         'console_scripts': [
-            'docker-link-helper=docker-link-helper:main',
+            'docker-link-helper=helper:link.main',
         ],
     }
 )

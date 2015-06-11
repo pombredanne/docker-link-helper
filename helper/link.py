@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import argparse
 import os
 import re
@@ -232,8 +233,10 @@ def test_env():
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Search files occurances for occurances of docker links and replaces them by their value')
-    parser.add_argument('-l', '--link', dest='links', action='append', help='mandatory links')
+    parser = argparse.ArgumentParser(
+        description='Search for occurrences of docker links and replace them by their value'
+    )
+    parser.add_argument('-l', '--link', dest='links', default=[], action='append', help='mandatory links')
     parser.add_argument('-s', '--show', action='store_true', help='show values of docker links')
     parser.add_argument('-t', '--test_env', action='store_true', help='use static test environment')
     parser.add_argument('files', nargs='+', help='search for links in these files')
@@ -248,6 +251,7 @@ def get_env(test_environment):
 
 def main():
     args = parse_args()
+    print(args)
     env = get_env(args.test_env)
     if args.show:
         for key, value in get_link_vars(get_links(env), env).items():
@@ -263,6 +267,3 @@ def main():
     env_links = get_links(env)
     link_vars = get_link_vars(env_links, env)
     file_replace(args.files, link_vars)
-
-if __name__ == '__main__':
-    main()
