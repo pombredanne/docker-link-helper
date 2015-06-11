@@ -238,7 +238,7 @@ def parse_args():
     )
     parser.add_argument('-l', '--link', dest='links', default=[], action='append', help='mandatory links')
     parser.add_argument('-s', '--show', action='store_true', help='show values of docker links')
-    parser.add_argument('-t', '--test_env', action='store_true', help='use static test environment')
+    parser.add_argument('-t', '--run-tests', action='store_true', help='use static test environment')
     parser.add_argument('files', nargs='+', help='search for links in these files')
     return parser.parse_args()
 
@@ -251,7 +251,11 @@ def get_env(test_environment):
 
 def main():
     args = parse_args()
-    print(args)
+    if args.run_tests:
+        import doctest
+        doctest.testmod()
+        sys.exit(0)
+
     env = get_env(args.test_env)
     if args.show:
         for key, value in get_link_vars(get_links(env), env).items():
@@ -267,3 +271,6 @@ def main():
     env_links = get_links(env)
     link_vars = get_link_vars(env_links, env)
     file_replace(args.files, link_vars)
+
+if __name__ == '__main__':
+    main()
