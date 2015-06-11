@@ -251,10 +251,6 @@ def get_env(test_environment):
 
 def main():
     args = parse_args()
-    if args.run_tests:
-        import doctest
-        doctest.testmod()
-        sys.exit(0)
 
     env = get_env(args.test_env)
     if args.show:
