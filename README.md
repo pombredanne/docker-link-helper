@@ -3,8 +3,8 @@
 ## Usage
 Install via Dockerfile
 ```
-apt-get -y install python-pip 
-pip install docker-link-helper
+RUN apt-get -y install python-setuptools 
+RUN easy_install docker-link-helper
 ```
 
 Run from entrypoint
