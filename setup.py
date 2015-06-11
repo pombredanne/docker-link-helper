@@ -11,7 +11,7 @@ setup(
     packages=['helper'],
     entry_points={
         'console_scripts': [
-            'docker-link-helper=helper:link.main',
+            'docker-link-helper=helper:main',
         ],
     }
 )
